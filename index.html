@@ -1,0 +1,149 @@
+<html>
+<head>
+	<title>Jo's Adventures</title>
+</head>
+
+<body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '168688783800486',
+      xfbml      : true,
+      version    : 'v3.0'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+    <canvas id="myCanvas" width="2160" height="1280">		
+        <p>Your browser does not support HTML5!</p>
+    </canvas>
+	
+	<script type="text/javascript">
+		//
+		var canvas = document.getElementById("myCanvas");
+		var context = canvas.getContext("2d");
+		var width = canvas.getAttribute('width');
+		var height = canvas.getAttribute('height');
+		
+		//
+		var bgImage = new Image();
+		var bgLogoImage = new Image();
+		var logoImage = new Image();
+		var playImage = new Image();
+		var leaderbordImage = new Image();
+		var infoImage = new Image();
+		var shopImage = new Image();
+		var dropdownImage = new Image();
+		var soundImage = new Image();
+		var fbImage = new Image();
+		var twitterImage = new Image();
+		var bgPlay = new Image();
+		var playJo = new Image();
+
+		//
+		bgImage.src = "https://sm2018b12.infhaarlem.nl/Images/BG/Landscape.png";
+		bgLogoImage.src = "https://sm2018b12.infhaarlem.nl/Images/Elements/Border/LandscapeTop.png";
+		logoImage.src = "https://sm2018b12.infhaarlem.nl/Images/BG/title_v03.png";
+		playImage.src = "https://sm2018b12.infhaarlem.nl/Images/Button/Play (1).png";
+		leaderbordImage.src = "https://sm2018b12.infhaarlem.nl/Images/Button/Score (1).png";
+		infoImage.src = "https://sm2018b12.infhaarlem.nl/Images/Button/Info (1).png";
+		shopImage.src = "https://sm2018b12.infhaarlem.nl/Images/Button/Shop (1).png";
+		dropdownImage.src = "https://sm2018b12.infhaarlem.nl/Images/Button/LevelSelect (1).png";
+		soundImage.src = "https://sm2018b12.infhaarlem.nl/Images/Button/Sound (1).png";
+		fbImage.src = "https://sm2018b12.infhaarlem.nl/Images/Button/Facebook (1).png";
+		twitterImage.src = "https://sm2018b12.infhaarlem.nl/Images/Button/Twitter (1).png";
+		bgPlay.src = "https://sm2018b12.infhaarlem.nl/Images/Elements/Tooltips/Tooltip (4).png";
+		playJo.src = "https://sm2018b12.infhaarlem.nl/Images/Character with outline/sprites/run outline.gif";
+		
+		//[0]Play, leaderbord, info, shop, dropd, sound, fb, twit
+		var buttonX = [561,825,1089,1343,0,164,1850,2005];
+		var buttonY = [744,744,744,744,0,0,0,0];
+		var buttonWidth = [254,254,254,254,154,154,154,154];
+		var buttonHeight = [277,277,277,277,168,168,168,168];
+		
+		//		
+		bgLogoImage.onload = function(){
+					context.drawImage(bgImage, 0, 0);
+			context.drawImage(bgLogoImage, 364, 0, 1464, 591);
+						context.drawImage(logoImage, 678, 24, 804, 324);
+									context.drawImage(bgPlay, 718, 622, 271, 122);
+												context.drawImage(playImage, buttonX[0], buttonY[0]);
+															context.drawImage(leaderbordImage, buttonX[1], buttonY[1]);
+																		context.drawImage(infoImage, buttonX[2], buttonY[2]);
+																					context.drawImage(shopImage, buttonX[3], buttonY[3]);
+																								context.drawImage(dropdownImage, buttonX[4], buttonY[4]);
+																											context.drawImage(dropdownImage, buttonX[4], buttonY[4]);
+
+
+
+
+
+												
+
+
+		}
+		/*
+		logoImage.onload = function(){
+			context.drawImage(logoImage, 678, 24, 804, 324);
+		}
+		
+		bgPlay.onload = function(){
+			context.drawImage(bgPlay, 718, 622, 271, 122);
+		}
+		
+		playJo.onload = function(){
+			context.drawImage(playJo, 734, 643, 51, 80);
+		}
+		
+		playImage.onload = function(){
+			context.drawImage(playImage, buttonX[0], buttonY[0]);
+		}
+
+		leaderbordImage.onload = function(){
+			context.drawImage(leaderbordImage, buttonX[1], buttonY[1]);
+		}
+
+		infoImage.onload = function(){
+			context.drawImage(infoImage, buttonX[2], buttonY[2]);
+		}
+
+		shopImage.onload = function(){
+			context.drawImage(shopImage, buttonX[3], buttonY[3]);
+		}
+		
+		dropdownImage.onload = function(){
+			context.drawImage(dropdownImage, buttonX[4], buttonY[4]);
+		}
+		
+		soundImage.onload = function(){
+			context.drawImage(soundImage, buttonX[5], buttonY[5]);
+		}
+		
+		fbImage.onload = function(){
+			context.drawImage(fbImage, buttonX[6], buttonY[6]);
+		}
+		
+		twitterImage.onload = function(){
+			context.drawImage(twitterImage, buttonX[7], buttonY[7]);
+		}
+		
+		bgImage.onload = function(){
+			context.drawImage(bgImage, 0, 0);
+		};
+		*/
+
+		
+	</script>
+
+</body>
+
+</html>
