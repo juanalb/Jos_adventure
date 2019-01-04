@@ -1,0 +1,132 @@
+<html>
+<head>
+	<title>Jo's Adventures</title>
+	<!-- MARKEERDER VOOR SAMENVOEGEN 25-06-2018 !!!!!!!!! -->
+		<style>
+
+			#gamecontainer {
+				width: 1280px;
+				height: 758px;
+				position: relative; }
+							
+			#myCanvas{ 
+				position: absolute; 
+				opacity: 0.3;
+				z-index: 1; }
+
+			.fb-login-button {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translateX(-50%) translateY(-50%);
+				z-index: 2;}		
+		</style>
+	<!-- TOT HIER MARKEERDER VOOR SAMENVOEGEN 25-06-2018 !!!!!!!!! -->
+</head>
+
+<body>
+
+<!-- MARKEERDER VOOR SAMENVOEGEN 25-06-2018 !!!!!!!!! -->
+	<div id="gamecontainer">
+		<canvas id="myCanvas" width="1280" height="758">		
+			<p>Your browser does not support HTML5!</p>
+		</canvas>				
+		<div class="fb-login-button" id="fbButton" onlogin="checkLoginState();" scope="public_profile, email" data-width="400" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>	
+	</div>
+<!-- TOT HIER MARKEERDER VOOR SAMENVOEGEN 25-06-2018 !!!!!!!!! -->
+
+	<!-- main menu imports-->
+	<script type="text/javascript" src="loadingFaceBook.js"></script> 
+	<script src="MainMenu.js"></script>
+	<script src="jquery.js"></script>
+	
+	<!-- game imports-->
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="gameBackground.js"></script>
+	<script type="text/javascript" src="highscore.js"></script>
+	<script type="text/javascript" src="hand.js"></script>
+	<script type="text/javascript" src="handCounter.js"></script>
+	<script type="text/javascript" src="game.js"></script>
+	<script type="text/javascript" src="player.js"></script>
+	<script type="text/javascript" src="platform.js"></script>
+	<script type="text/javascript" src="enemy1.js"></script>
+	<!-- code van na 1ste poging
+	<script type="text/javascript" src="newScene.js"></script>
+	-->
+	<script type="text/javascript" src="gameText.js"></script>
+	
+	<script type="text/javascript">
+	
+		// canvas vars moet hier want anders is canvas not referenced
+		var canvas = document.getElementById("myCanvas");
+		var context = canvas.getContext("2d");
+		var width = canvas.getAttribute('width');
+		var height = canvas.getAttribute('height');
+		//jquery 
+		//Jquery/AJAX moet hier want anders werkt t niet
+		var playerScores = [];
+		var playerNames =[];
+		var playerHands =[];
+		var messages =[];
+		
+		$("document").ready(function(){
+		setImageSources();
+		
+		song.play();
+		
+				
+        $.ajax({
+		  type: "Get",
+		  url: "getdata.php",
+		  datatype: "json",
+		  success: function(data) {
+			for(i=0; i<data.length;i++)
+				{
+					playerNames[i]=data[i].name;
+					playerScores[i]=data[i].score;
+					playerHands[i]=data[i].score;
+				}
+			}
+		})
+		$.ajax({
+		  type: "Get",
+		  url: "getMessages.php",
+		  datatype: "json",
+		  success: function(data) {
+			//alert(data);
+			console.log((data));
+			for(i=0; i<data.length;i++)
+				{
+					messages[i]=data[i].message;
+				}
+			}
+		})
+		});
+		canvas.addEventListener("mousemove", checkPos);
+		canvas.addEventListener("mouseup", checkClick);
+		window.onload=function(){
+			song.play();
+		}
+		timerId = setInterval(update, 10);
+		
+		
+		isGamestarted = false;
+		
+		function update() 
+		{
+			if(states[5]===1 && !isGamestarted){
+				initGame();
+				isGamestarted = true;
+			}else if(states[5]===0){
+				checkHover();
+				drawMain();
+			}
+		}
+		
+
+		
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,159 @@
+<html>
+<head>
+	<title>Jo's Adventures</title>
+</head>
+
+<body>
+
+
+<script>
+	var fbUserName="test3";
+	var score = 1000;
+//zorg dat de appid klopt
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '168688783800486',
+      xfbml      : true,
+      version    : 'v3.0'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+   
+   //eerste use get die username
+   FB.api("/{user-id}",function (response) {
+      if (response && !response.error) {
+		fbUserName = response;
+        console.log((response));
+      }
+	  else
+	  {
+		console.log((response.error));
+	  }
+    }
+);
+</script>
+
+<canvas id="myCanvas" width="1280" height="758">		
+        <p>Your browser does not support HTML5!</p>
+    </canvas>
+	<!-- main menu imports-->
+	<script src="MainMenu.js"></script>
+	<script src="jquery.js"></script>
+	
+	<!-- game imports-->
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="gameBackground.js"></script>
+	<script type="text/javascript" src="loadingFaceBook.js"></script>
+	<script type="text/javascript" src="highscore.js"></script>
+	<script type="text/javascript" src="hand.js"></script>
+	<script type="text/javascript" src="handCounter.js"></script>
+	<script type="text/javascript" src="game.js"></script>
+	<script type="text/javascript" src="player.js"></script>
+	<script type="text/javascript" src="platform.js"></script>
+	<script type="text/javascript" src="enemy1.js"></script>
+	<!-- code van na 1ste poging-->
+	<script type="text/javascript" src="newScene.js"></script>
+	<script type="text/javascript" src="gameText.js"></script>
+	
+	
+	<script type="text/javascript">
+	
+		// canvas vars moet hier want anders is canvas not referenced
+		var canvas = document.getElementById("myCanvas");
+		var context = canvas.getContext("2d");
+		var width = canvas.getAttribute('width');
+		var height = canvas.getAttribute('height');
+		//jquery 
+		//Jquery/AJAX moet hier want anders werkt t niet
+		var playerScores = [];
+		var playerNames =[];
+		var playerHands =[];
+		var messages =[];
+		$("document").ready(function(){
+		setImageSources();
+		song.play();
+		
+		$.post('saveFacebookUser.php',{postUser:fbUserName},
+				function(data)
+				{
+				
+				});
+		
+		
+		
+        $.ajax({
+		  type: "Get",
+		  url: "getdata.php",
+		  datatype: "json",
+		  success: function(data) {
+			for(i=0; i<data.length;i++)
+				{
+					playerNames[i]=data[i].name;
+					playerScores[i]=data[i].score;
+					playerHands[i]=data[i].hands;
+				}
+			}
+		})
+		/*
+		$.ajax({
+		  type: "Get",
+		  url: "getUserNames.php",
+		  datatype: "json",
+		  success: function(data) {
+			for(i=0; i<data.length;i++)
+				{
+					playerNames[i]=data[i].name;
+				}
+			}
+		})
+		*/
+		$.ajax({
+		  type: "Get",
+		  url: "getMessages.php",
+		  datatype: "json",
+		  success: function(data) {
+			//alert(data);
+			console.log((data));
+			for(i=0; i<data.length;i++)
+				{
+					messages[i]=data[i].message;
+				}
+			}
+		})
+		});
+		canvas.addEventListener("mousemove", checkPos);
+		canvas.addEventListener("mouseup", checkClick);
+		/*window.onload=function(){
+			
+		}*/
+		timerId = setInterval(update, 10);
+		
+		
+		isGamestarted = false;
+		
+		function update() 
+		{
+			if(states[5]===1 && !isGamestarted){
+				initGame();
+				isGamestarted = true;
+			}else if(states[5]===0){
+				checkHover();
+				drawMain();
+			}
+		}
+		
+
+		
+	</script>
+
+</body>
+
+</html>
